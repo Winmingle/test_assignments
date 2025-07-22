@@ -5,18 +5,18 @@ if [[ -z "$STUDENT_SCRIPT" ]]; then
   exit 1
 fi
 
-pass_count=0
-fail_count=0
+pass=0
+fail=0
 
 run_test() {
   expected="$3"
   output=$(bash "$STUDENT_SCRIPT" "$1" "$2")
   if [[ "$output" == "$expected" ]]; then
     echo "✅ Test Passed: $1 + $2 = $expected"
-    ((pass_count++))
+    ((pass++))
   else
     echo "❌ Test Failed: $1 + $2 expected $expected but got $output"
-    ((fail_count++))
+    ((fail++))
   fi
 }
 
@@ -25,13 +25,9 @@ run_test 5 10 15
 run_test 0 0 0
 run_test 7 8 15
 
-echo ""
-echo "Tests Passed: $pass_count"
-echo "Tests Failed: $fail_count"
+echo "Tests Passed: $pass"
+echo "Tests Failed: $fail"
 
-# Exit with 1 if any tests failed
-if [[ $fail_count -gt 0 ]]; then
+if [[ $fail -gt 0 ]]; then
   exit 1
 fi
-
-exit 0
