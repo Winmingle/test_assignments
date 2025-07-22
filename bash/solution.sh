@@ -1,33 +1,27 @@
 #!/bin/bash
 
-if [[ -z "$STUDENT_SCRIPT" ]]; then
-  echo "❌ STUDENT_SCRIPT environment variable not set"
-  exit 1
-fi
-
-pass=0
-fail=0
+pass_count=0
+fail_count=0
 
 run_test() {
-  expected="$3"
-  output=$(bash "$STUDENT_SCRIPT" "$1" "$2")
-  if [[ "$output" == "$expected" ]]; then
-    echo "✅ Test Passed: $1 + $2 = $expected"
-    ((pass++))
+  input="$1"
+  expected="$2"
+  output=$(echo "$input" | bash solution.sh)
+  if [ "$output" = "$expected" ]; then
+    echo "✅ Passed: $input → $expected"
+    ((pass_count++))
   else
-    echo "❌ Test Failed: $1 + $2 expected $expected but got $output"
-    ((fail++))
+    echo "❌ Failed: $input → expected $expected, got $output"
+    ((fail_count++))
   fi
 }
 
-run_test 2 3 5
-run_test 5 10 15
-run_test 0 0 0
-run_test 7 8 15
+run_test "1234" "10"
+run_test "99" "18"
+run_test "0" "0"
+run_test "10001" "2"
+run_test "567" "18"
 
-echo "Tests Passed: $pass"
-echo "Tests Failed: $fail"
-
-if [[ $fail -gt 0 ]]; then
-  exit 1
-fi
+total=$((pass_count + fail_count))
+score=$((100 * pass_count / total))
+echo "✅ Score: $score% ($pass_count passed, $fail_count failed)"
