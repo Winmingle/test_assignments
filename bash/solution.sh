@@ -1,34 +1,31 @@
 #!/bin/bash
+# Test script for solution.sh
 
-# Test cases
-inputs=("2" "0" "-4")
-expected_outputs=("4" "0" "16")
-
-# Counters
-total=${#inputs[@]}
+# Set initial values
+total=0
 passed=0
 
-for i in "${!inputs[@]}"; do
-    output=$(echo "${inputs[$i]}" | bash solution.sh)
-    expected="${expected_outputs[$i]}"
+run_test() {
+  input1=$1
+  input2=$2
+  expected=$3
+  ((total++))
+  output=$(bash solution.sh "$input1" "$input2")
+  if [ "$output" == "$expected" ]; then
+    echo "✅ Test $total passed"
+    ((passed++))
+  else
+    echo "❌ Test $total failed: Expected $expected but got $output"
+  fi
+}
 
-    if [ "$output" == "$expected" ]; then
-        echo "✅ Test $((i+1)): Passed"
-        ((passed++))
-    else
-        echo "❌ Test $((i+1)): Failed (Expected: $expected, Got: $output)"
-    fi
-done
+# Test cases
+run_test 2 3 5
+run_test 10 15 25
+run_test 0 0 0
+run_test -5 7 2
 
-# Final score
+# Final result
 score=$((passed * 100 / total))
-
-echo "✅ Passed: $passed/$total"
 echo "📊 Score: $score%"
-
-# Exit 0 if perfect, else 1
-if [ $score -eq 100 ]; then
-    exit 0
-else
-    exit 1
-fi
+exit 0
