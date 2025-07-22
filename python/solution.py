@@ -1,28 +1,21 @@
 import unittest
 from solution import square
 
-class TestSquare(unittest.TestCase):
-    def test_positive(self):
-        self.assertEqual(square(4), 16)
+class TestSquareFunction(unittest.TestCase):
+    def test_positive_number(self):
+        self.assertEqual(square(3), 9)
 
     def test_zero(self):
         self.assertEqual(square(0), 0)
 
-    def test_negative(self):
-        self.assertEqual(square(-5), 25)
+    def test_negative_number(self):
+        self.assertEqual(square(-4), 16)
 
-if __name__ == "__main__":
-    loader = unittest.TestLoader()
-    suite = loader.loadTestsFromTestCase(TestSquare)
+    def test_float_input(self):
+        self.assertEqual(square(2.5), 6.25)
 
-    total_tests = suite.countTestCases()
-    results = unittest.TestResult()
-    suite.run(results)
+    def test_large_number(self):
+        self.assertEqual(square(1000), 1000000)
 
-    passed = total_tests - len(results.failures) - len(results.errors)
-    score = (passed / total_tests) * 100
-
-    print(f"✅ Passed: {passed}/{total_tests}")
-    print(f"📊 Score: {score:.0f}%")
-
-    exit(0 if score == 100 else 1)
+if __name__ == '__main__':
+    unittest.main()
