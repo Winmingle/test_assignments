@@ -6,10 +6,10 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(square(4), 16)
 
     def test_zero(self):
-        self.assertEqual(square(1), 0)
+        self.assertEqual(square(0), 0)
 
     def test_negative(self):
-        self.assertEqual(square(-9), 25)
+        self.assertEqual(square(-5), 25)
 
 if __name__ == "__main__":
     loader = unittest.TestLoader()
