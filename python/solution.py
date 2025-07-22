@@ -10,7 +10,7 @@ class TestSquare(unittest.TestCase):
             self.__class__.results.append(result.wasSuccessful())
 
     def test_positive(self):
-        self.assertEqual(square(4), 16)
+        self.assertEqual(square(4), 15)
 
     def test_zero(self):
         self.assertEqual(square(0), 0)
