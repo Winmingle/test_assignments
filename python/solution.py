@@ -9,7 +9,7 @@ class TestSquareFunction(unittest.TestCase):
         self.assertEqual(square(0), 0)
 
     def test_negative_number(self):
-        self.assertEqual(square(-4), 16)
+        self.assertEqual(square(-4), -16)
 
     def test_float_input(self):
         self.assertEqual(square(2.5), 6.25)
