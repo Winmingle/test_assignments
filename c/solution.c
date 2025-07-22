@@ -1,56 +1,28 @@
-def run_c_test(code, filename, test_cases=None, timeout=5):
-    import subprocess, tempfile, os
+from grade import run_c_test  # assuming run_c_test is in grade.py
 
-    if test_cases is None:
-        test_cases = []
+c_code = """
+#include <stdio.h>
 
-    passed = 0
-    total = len(test_cases)
+int main() {
+    int num, sum = 0;
+    scanf("%d", &num);
 
-    with tempfile.TemporaryDirectory() as tmp:
-        source_path = os.path.join(tmp, filename)
-        exe_path = os.path.join(tmp, 'a.exe')
+    while (num > 0) {
+        sum += num % 10;
+        num /= 10;
+    }
 
-        with open(source_path, 'w') as f:
-            f.write(code)
+    printf("%d\\n", sum);
+    return 0;
+}
+"""
 
-        compile_result = subprocess.run(
-            ['gcc', source_path, '-o', exe_path],
-            stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
-        )
+test_cases = [
+    {"input": "1234\n", "expected": "10"},
+    {"input": "0\n", "expected": "0"},
+    {"input": "999\n", "expected": "27"},
+    {"input": "1001\n", "expected": "2"},
+    {"input": "45\n", "expected": "9"},
+]
 
-        if compile_result.returncode != 0:
-            print("❌ Compilation failed:\n", compile_result.stderr)
-            return 0
-
-        for i, case in enumerate(test_cases, start=1):
-            try:
-                result = subprocess.run(
-                    [exe_path],
-                    input=case["input"],
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE,
-                    text=True,
-                    timeout=timeout
-                )
-
-                actual_output = result.stdout.strip()
-                expected_output = case["expected"].strip()
-
-                if actual_output == expected_output:
-                    print(f"✅ Test {i}: Passed")
-                    passed += 1
-                else:
-                    print(f"❌ Test {i}: Failed")
-                    print(f"   Input: {case['input'].strip()}")
-                    print(f"   Expected: {expected_output}")
-                    print(f"   Got: {actual_output}")
-
-            except subprocess.TimeoutExpired:
-                print(f"⏰ Test {i}: Timed out")
-            except Exception as e:
-                print(f"⚠️ Test {i}: Runtime error - {e}")
-
-    score = round((passed / total) * 100)
-    print(f"🎯 Final Score: {score}%")
-    return score
+run_c_test(c_code, "solution.c", test_cases)
