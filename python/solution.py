@@ -10,13 +10,13 @@ class TestSquare(unittest.TestCase):
             self.__class__.results.append(result.wasSuccessful())
 
     def test_positive(self):
-        self.assertEqual(square(4), 16)
+        self.assertEqual(square(2), 16)
 
     def test_zero(self):
-        self.assertEqual(square(0), 0)
+        self.assertEqual(square(1), 0)
 
     def test_negative(self):
-        self.assertEqual(square(-5), 25)
+        self.assertEqual(square(-9), 25)
 
 if __name__ == "__main__":
     suite = unittest.TestLoader().loadTestsFromTestCase(TestSquare)
