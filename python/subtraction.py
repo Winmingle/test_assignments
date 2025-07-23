@@ -1,5 +1,3 @@
-# test_solution.py
-
 import unittest
 from subtraction import subtract
 
