@@ -1,7 +1,7 @@
 # test_solution.py
 
 import unittest
-from solution import subtract
+from subtraction import subtract
 
 class TestSubtractFunction(unittest.TestCase):
     def test_positive_numbers(self):
