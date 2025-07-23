@@ -3,7 +3,7 @@ from solution import square
 
 class TestSquareFunction(unittest.TestCase):
     def test_positive_number(self):
-        self.assertEqual(square(2), 9)
+        self.assertEqual(square(3), 9)
 
     def test_zero(self):
         self.assertEqual(square(0), 0)
