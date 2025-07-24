@@ -1,6 +1,6 @@
 [
-  { "input": "2 3\n", "expected": "5" },
-  { "input": "10 15\n", "expected": "25" },
-  { "input": "0 0\n", "expected": "0" },
-  { "input": "-5 7\n", "expected": "2" }
+  { "input": "2 3", "output": "5" },
+  { "input": "10 15", "output": "25" },
+  { "input": "0 0", "output": "0" },
+  { "input": "-5 7", "output": "2" }
 ]
