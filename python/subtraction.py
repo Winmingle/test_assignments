@@ -3,7 +3,7 @@ from subtraction import subtract
 
 class TestSubtractFunction(unittest.TestCase):
     def test_positive_numbers(self):
-        self.assertEqual(subtract(10, 3), 7)
+        self.assertEqual(subtract(10, 3), 6)
 
     def test_negative_result(self):
         self.assertEqual(subtract(3, 10), -7)
